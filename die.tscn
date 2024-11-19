@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://crpabghmhvpdl"]
+
+[ext_resource type="Script" path="res://die.gd" id="1_n5ee5"]
+[ext_resource type="PackedScene" uid="uid://dwf62alkglvn3" path="res://Die.glb" id="2_m7b6i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uo3sb"]
+size = Vector3(2, 2, 2)
+
+[node name="Die" type="RigidBody3D"]
+gravity_scale = 2.0
+freeze = true
+script = ExtResource("1_n5ee5")
+
+[node name="Die" parent="." instance=ExtResource("2_m7b6i")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Die"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0382635, 0)
+shape = SubResource("BoxShape3D_uo3sb")
