@@ -1,18 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://crpabghmhvpdl"]
+[gd_scene load_steps=6 format=3 uid="uid://crpabghmhvpdl"]
 
 [ext_resource type="Script" path="res://die.gd" id="1_n5ee5"]
-[ext_resource type="PackedScene" uid="uid://dwf62alkglvn3" path="res://Die.glb" id="2_m7b6i"]
+[ext_resource type="PackedScene" uid="uid://i4gpwxwvgo76" path="res://dice.glb" id="2_pjkn5"]
+[ext_resource type="PackedScene" uid="uid://bba2fvih7yr8b" path="res://die_raycast.tscn" id="3_6jksd"]
+[ext_resource type="Script" path="res://die_raycast.gd" id="4_3vjbp"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_uo3sb"]
-size = Vector3(2, 2, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpwot"]
+size = Vector3(8, 8, 8)
 
 [node name="Die" type="RigidBody3D"]
 gravity_scale = 2.0
 freeze = true
 script = ExtResource("1_n5ee5")
 
-[node name="Die" parent="." instance=ExtResource("2_m7b6i")]
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_pjkn5")]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Die"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0382635, 0)
-shape = SubResource("BoxShape3D_uo3sb")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qpwot")
+
+[node name="Raycasts" type="Node3D" parent="."]
+
+[node name="DieRaycast1" parent="Raycasts" instance=ExtResource("3_6jksd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.05769, 0)
+target_position = Vector3(0, -0.1, 0)
+script = ExtResource("4_3vjbp")
+opposite_side = 6
+
+[node name="DieRaycast2" parent="Raycasts" instance=ExtResource("3_6jksd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.07624, 0, 0)
+target_position = Vector3(0.1, 0, 0)
+script = ExtResource("4_3vjbp")
+opposite_side = 5
+
+[node name="DieRaycast3" parent="Raycasts" instance=ExtResource("3_6jksd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.13544)
+target_position = Vector3(0, 0, 0.1)
+script = ExtResource("4_3vjbp")
+opposite_side = 4
+
+[node name="DieRaycast4" parent="Raycasts" instance=ExtResource("3_6jksd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.12359)
+target_position = Vector3(0, 0, -0.1)
+script = ExtResource("4_3vjbp")
+opposite_side = 3
+
+[node name="DieRaycast5" parent="Raycasts" instance=ExtResource("3_6jksd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.19309, 0, 0)
+target_position = Vector3(-0.1, 0, 0)
+script = ExtResource("4_3vjbp")
+opposite_side = 2
+
+[node name="DieRaycast6" parent="Raycasts" instance=ExtResource("3_6jksd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.15147, 0)
+target_position = Vector3(0, 0.1, 0)
+script = ExtResource("4_3vjbp")
+opposite_side = 1
+
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]

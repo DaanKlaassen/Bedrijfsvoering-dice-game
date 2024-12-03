@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://byrqsdjgwdth1"]
+
+[ext_resource type="PackedScene" uid="uid://cbwu58dp2a6kh" path="res://simple_wood_table.glb" id="1_36ogl"]
+[ext_resource type="PackedScene" uid="uid://crpabghmhvpdl" path="res://die.tscn" id="2_8563l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qdp8b"]
+size = Vector3(2.49696, 1.20801, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ubt6w"]
+bounce = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aft6i"]
+size = Vector3(1, 3.13525, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_21fwm"]
+bounce = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d68jx"]
+bounce = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lvj0e"]
+bounce = 1.0
+
+[node name="World" type="Node3D"]
+
+[node name="table" type="MeshInstance3D" parent="."]
+
+[node name="Sketchfab_Scene" parent="table" instance=ExtResource("1_36ogl")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="table/StaticBody3D"]
+transform = Transform3D(6.30445, 0, 0, 0, 5.08858, 0, 0, 0, 8.29075, 0, 0, 0)
+shape = SubResource("BoxShape3D_qdp8b")
+
+[node name="border" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_ubt6w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="border"]
+transform = Transform3D(16.0038, 0, 0, 0, 2.74591, 0, 0, 0, 0.975119, -0.0640967, 4.25779, -3.63549)
+shape = SubResource("BoxShape3D_aft6i")
+
+[node name="border2" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_21fwm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="border2"]
+transform = Transform3D(16.0038, 0, 0, 0, 2.80247, 0, 0, 0, 0.975119, -0.0782175, 4.47927, 3.66467)
+shape = SubResource("BoxShape3D_aft6i")
+
+[node name="border3" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_d68jx")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="border3"]
+transform = Transform3D(-0.00498598, -0.000170394, 0.975225, 0.00229003, 2.57231, 6.4643e-05, -16.0076, 0.000368044, -0.00030375, -7.89926, 5.10708, 0.593899)
+shape = SubResource("BoxShape3D_aft6i")
+
+[node name="border4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0368481, 9.53674e-07, 0.00296783)
+physics_material_override = SubResource("PhysicsMaterial_lvj0e")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="border4"]
+transform = Transform3D(-0.00498635, -0.000204107, 0.975258, 0.0022902, 3.08125, 6.46452e-05, -16.0088, 0.000440863, -0.000303761, 7.25326, 4.76977, 0.59376)
+shape = SubResource("BoxShape3D_aft6i")
+
+[node name="Die" parent="." instance=ExtResource("2_8563l")]
+transform = Transform3D(0.05, 0, 0, 0, 0.043, 0, 0, 0, 0.05, 0, 11.6021, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.0608, 0)
+fov = 50.625
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(-0.999933, -5.05798e-10, 0.0115713, 5.05798e-10, 1, 8.74198e-08, -0.0115713, 8.74198e-08, -0.999933, -0.145077, -0.0124466, -17.7285)
+light_energy = 16.0
+spot_range = 9.87165
